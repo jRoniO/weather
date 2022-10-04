@@ -12,10 +12,8 @@ void loop()
   Arduino har en inbyggd map() funktion, men map() fungerar inte för flöten, så vi har en enkel mapFloat() funktion.
  **************************************************************************************************************************/
   float wind_speed = mapfloat(voltage, 0.4, 2, 0, 32.4);
-  Serial.print("Vind Hastighet =");
-  Serial.print(wind_speed);
-  Serial.println("m/s");
-  delay(100);
+  Serial.println(wind_speed);
+  delay(1000);
 }
  float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
 {
