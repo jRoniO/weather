@@ -1,0 +1,58 @@
+sudo apt update
+sudo apt install apache2
+
+#So let’s start by creating a folder for our new website in /var/www/ by running
+sudo mkdir /var/www/gci/
+
+#Now that we have a directory created for our site, lets have an HTML file in it.
+# Let’s go into our newly created directory and create one by typing:
+
+cd /var/www/gci/
+nano index.html
+
+#Paste the following code in the index.html file:
+<html>
+<head>
+  <title> Ubuntu rocks! </title>
+</head>
+<body>
+  <p> I'm running this website on an Ubuntu Server server!
+</body>
+</html>
+
+#Now let’s create a VirtualHost file so it’ll show up when we type in gci.example.com.
+#We start this step by going into the configuration files directory:
+
+cd /etc/apache2/sites-available/
+sudo cp 000-default.conf gci.conf
+
+#Now edit the configuration file:
+sudo nano gci.conf
+
+#We should have our email in ServerAdmin so users can reach you in case Apache experiences any error:
+ServerAdmin yourname@example.com
+
+#We also want the DocumentRoot directive to point to the directory our site files are hosted on:
+DocumentRoot /var/www/gci/
+The default file doesn’t come with a ServerName directive so we’ll have to add and define it by adding this line below the last directive:
+
+#ServerName gci.example.com
+#This ensures people reach the right site instead of the default one when they type in 
+gci.example.com.
+#Now that we’re done configuring our site, let’s save and activate it in the next step!
+#After setting up our website, we need to activate the virtual hosts configuration file to enable it. 
+#We do that by running the following command in the configuration file directory:
+
+sudo a2ensite gci.conf
+#You should see the following output
+"Enabling site gci.
+To activate the new configuration, you need to run:
+  service apache2 reload
+root@ubuntu-server:/etc/apache2/sites-available#"
+
+#To load the new site, we restart Apache by typing:
+
+service apache2 reload
+
+              Check this link
+ https://ubuntu.com/tutorials/install-and-configure-apache#5-activating-virtualhost-file
