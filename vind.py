@@ -1,22 +1,15 @@
 #!/usr/bin/python3
-#!/usr/bin/env python3
 
 import serial
 import time
 
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-ser.reset_input_buffer()
+if __name__ == '__main__':
+        ser = serial.Serial('/dev/ttyACM0',9600, timeout=1)
+        ser.flush()
 
 while True:
-	line = ser.readline().decode('utf-8').rstrip()
-	
-	if line:
-		remove_negative = line.replace('-','0,00')
-		remove_decimal = remove_negative[0:4]
-		print(f'Vindhastigheten är %s m/s' % remove_decimal)
-		time.sleep(1)
-
-	else:
-		print(f'Vindhastigheten är %s m/s' % line)
-		time.sleep(1)
-		
+        if ser.in_waiting > 0:
+                line = ser.readline().decode('utf-8').rstrip()
+                file = open("/var/www/html/vindData.txt","w")
+                file.write('Vindhastigheten är: %s m/s' % line)
+                file.close()
