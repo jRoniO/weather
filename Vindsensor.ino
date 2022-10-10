@@ -18,9 +18,8 @@ void loop()
   Vindhastigheten startar på 1m/s vid 0,4V med max 32,4m/s runt 2.
   Arduino har en inbyggd map() funktion, men map() fungerar inte för float, så vi har en enkel mapFloat() funktion.
   Mappningen sparas som en float i variabeln wind_speed.
-  En if-sats med argumentet om wind_speed är mindre än "0" så printal "0,00" ut för att undvika negativa värden.
+  En if-sats med argumentet om wind_speed är mindre än "0" så printas "0,00" ut för att undvika negativa värden.
   Annars så printas korrekt uppmätt värde ut.
-  Därefter skrivs wind_speed ut.
 *********************************************************************************************************************/
   float wind_speed = mapfloat(voltage, 0.4, 2, 0, 32.4);
   if (wind_speed < 0)
